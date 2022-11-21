@@ -1,6 +1,7 @@
 package negocio;
 
 public class Ticket {
+	
 	private int numeroTicket;
 	private float monto;
 	private boolean utilizado;
@@ -8,6 +9,12 @@ public class Ticket {
 	public Ticket() {
 		
 	}
+	
+	public Ticket(float monto) {
+		this.monto = monto;
+		this.utilizado = false;
+	}
+	
 
 	public float getMonto() {
 		return monto;
@@ -32,10 +39,17 @@ public class Ticket {
 	public void setUtilizado(boolean utilizado) {
 		this.utilizado = utilizado;
 	}
-	
+
 	public boolean soyElTicket(int numeroTicket) {
 		return this.numeroTicket == numeroTicket;
 	}
+	public Ticket soyElTicket2(Ticket ticket) {
+		if (this.numeroTicket == ticket.numeroTicket) {
+			return ticket;
+		}
+		return null;
+	}
+	
 	public boolean sePuedeUtilizar() {
 		return !utilizado;
 	}

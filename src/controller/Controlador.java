@@ -1,17 +1,23 @@
 package controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import negocio.Caja;
 import negocio.Casilla;
+import negocio.Comprobante;
 import negocio.Fruta;
 import negocio.Maquina;
 import negocio.Premio;
+import negocio.Ticket;
 
 public class Controlador {
 	private static Controlador instancia;
 	private List<Fruta> frutas;
 	private List<Premio> premios;
 	private List<Casilla> casillas;
+	private List<Comprobante> comprobantes;
+	private List<Ticket> tickets;
 
 	final float PRECIO_JUGADA_1 = 10f;
 	final float PRECIO_JUGADA_2 = 50f;
@@ -19,7 +25,10 @@ public class Controlador {
 	//todo:sacar esta maquina
 	Maquina maquina1;
 	
+	private Caja caja;
+	
 	public Controlador() {
+		this.caja = new Caja();
 		cargarDatos();
 	}
 	
@@ -144,4 +153,22 @@ public class Controlador {
 			System.out.print("La maquina no tiene credito para realizar la jugada");
 		}
 	}
+
+	public void retirarDinero(String nroComprobante) {
+		this.existeComprobante(nroComprobante).ifPresentOrElse(comprobante -> {
+			this.caja.retirarDinero(comprobante);
+		}, () -> {
+			System.out.print("No existe un comprobante valido con ese numero.");
+		});
+	}
+
+	
+	private Optional<Ticket> existeTicket(int nroTicket) {
+		return tickets.stream().filter(ticket -> ticket.soyElTicket(nroTicket) && ticket.sePuedeUtilizar()).findFirst();
+	}
+	
+	private Optional<Comprobante> existeComprobante(String nroComprobante) {
+		return comprobantes.stream().filter(comprobante -> comprobante.soyElComprobante(nroComprobante) && comprobante.sePuedeUtilizar()).findFirst();
+	}
+	
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class Controlador {
 	private List<Premio> premios;
 	private List<Casilla> casillas;
 	private List<Comprobante> comprobantes;
-	private List<Ticket> tickets;
+	private List<Ticket> tickets = new ArrayList<>();
 
 	final float PRECIO_JUGADA_1 = 10f;
 	final float PRECIO_JUGADA_2 = 50f;
@@ -29,6 +30,14 @@ public class Controlador {
 	public Controlador() {
 		this.caja = new Caja();
 		cargarDatos();
+		
+		//ELIMINAR ESTO
+		Ticket t = new Ticket();
+		t.setMonto(1000f);
+		t.setNumeroTicket(10);
+		t.setUtilizado(false);
+		tickets.add(t);
+		//
 	}
 	
 	public static Controlador getInstance() {

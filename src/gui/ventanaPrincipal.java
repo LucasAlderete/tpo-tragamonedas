@@ -20,7 +20,7 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
 	JLabel Titulo;
 
 	public ventanaPrincipal() {
-		setSize(700, 600);
+		setSize(700, 250);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		iniciarComponentes();
@@ -33,22 +33,22 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
 
 		btnJugar = new JButton();
 		btnJugar.setText("Jugar");
-		btnJugar.setBounds(20, 389, 200, 25);
+		btnJugar.setBounds(20, 150, 200, 25);
 		btnJugar.addActionListener(this);
 
 		btnCaja = new JButton();
 		btnCaja.setText("Caja");
-		btnCaja.setBounds(241, 389, 200, 25);
+		btnCaja.setBounds(241, 150, 200, 25);
 		btnCaja.addActionListener(this);
 
 		btnSalir = new JButton();
 		btnSalir.setText("Salir");
-		btnSalir.setBounds(463, 389, 200, 25);
+		btnSalir.setBounds(463, 150, 200, 25);
 		btnSalir.addActionListener(this);
 
 		Titulo = new JLabel();
 		Titulo.setFont(getFont());
-		Titulo.setText("TPO-ioo----- Tragamonedas ");
+		Titulo.setText("TPO Tragamonedas ");
 		Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		Titulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, UIManager.getColor("ToolBar.dockingForeground"),
 				UIManager.getColor("activeCaption")));

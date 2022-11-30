@@ -19,6 +19,7 @@ public class Controlador {
 	private List<Premio> premios;
 	private List<Casilla> casillas;
 	private List<Comprobante> comprobantes;
+	private boolean sePuedeJugar = false;
 
 	final float PRECIO_JUGADA = 10f;
 
@@ -52,7 +53,7 @@ public class Controlador {
 	private void cargarPremios() {
 		// Definicion de premios
 
-		Fruta manzana = new Fruta("Manzana");
+		Fruta pera = new Fruta("pera");
 		Fruta uva = new Fruta("Uva");
 		Fruta frutilla = new Fruta("Frutilla");
 
@@ -72,16 +73,16 @@ public class Controlador {
 
 		// premio 2: manzana - manzana - uva
 		Casilla primerCasillaPremio2 = new Casilla(1);
-		primerCasillaPremio2.setFruta(manzana);
+		primerCasillaPremio2.setFruta(pera);
 		Casilla segundaCasillaPremio2 = new Casilla(2);
-		segundaCasillaPremio2.setFruta(manzana);
+		segundaCasillaPremio2.setFruta(pera);
 		Casilla tercerCasillaPremio2 = new Casilla(3);
 		tercerCasillaPremio2.setFruta(uva);
 		List<Casilla> combinacionPremio2 = List.of(primerCasillaPremio2, segundaCasillaPremio2, tercerCasillaPremio2);
 
 		Premio premio2 = new Premio();
 		premio2.setCombinacion(combinacionPremio2);
-		premio2.setNombre("doble manzana + uva");
+		premio2.setNombre("pera pera uva");
 		premio2.setPremio(300f);
 
 		this.premios = List.of(premio1, premio2);
@@ -89,13 +90,14 @@ public class Controlador {
 
 	private void cargarFrutas() {
 		// Definicion el set de frutas que puede contener cada casilla
-		Fruta manzana = new Fruta("Manzana");
 		Fruta uva = new Fruta("Uva");
 		Fruta frutilla = new Fruta("Frutilla");
 		Fruta banana = new Fruta("Banana");
 		Fruta guinda = new Fruta("Guinda");
 		Fruta sandia = new Fruta("Sandia");
-		frutas = List.of(manzana, uva, frutilla, banana, guinda, sandia);
+		Fruta pera = new Fruta("Pera");
+		frutas = List.of(pera, uva, frutilla, banana, guinda, sandia);
+		// frutas = List.of(frutilla);
 	}
 
 	private void cargarCasillas() {
@@ -115,24 +117,27 @@ public class Controlador {
 	}
 
 	public void jugar() {
-
+		sePuedeJugar = false;
 		if (!maquina.hasRecaudacionMinima()) {
-			System.out.print(
+			maquina.setMsj(
 					"Se ha alcanzado la recaudación mínima y existe posibilidad de no poder pagar los próximos premios");
 		}
 
 		if (maquina.hasCreditoParaJugar()) {
+			sePuedeJugar = true;
 			maquina.jugar();
 		} else {
-			System.out.print("La maquina no tiene credito para realizar la jugada");
+			maquina.setMsj("La maquina no tiene credito para realizar la jugada");
 		}
 	}
 
-	public void retirarDinero(String nroComprobante) {
+	public boolean retirarDinero(String nroComprobante) {
 		this.existeComprobante(nroComprobante).ifPresent(comprobante -> {
-			this.caja.retirarDinero(comprobante);
+			caja.retirarDinero(comprobante);
 			usarComprobante(comprobante);
 		});
+
+		return this.existeComprobante(nroComprobante).isPresent();
 	}
 
 	public boolean ingresarCredito(int numeroTicket) {
@@ -179,9 +184,13 @@ public class Controlador {
 		comprobantes.add(comprobante);
 		return comprobante;
 	}
-	
+
 	public MaquinaView getMaquinaView() {
 		return this.maquina.toView();
+	}
+
+	public boolean sePuedeJugar() {
+		return this.sePuedeJugar;
 	}
 
 }

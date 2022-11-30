@@ -19,7 +19,7 @@ import negocio.Ticket;
 
 public class ventanaCaja extends JFrame implements ActionListener {
 
-	JLabel lblIngreseMonto, lblIngreseNumTicket, lblNumeroTicket, lblComprobante;
+	JLabel lblIngreseMonto, lblNumeroComprobante, lblNumeroTicket, lblComprobante;
 	JTextField txtMontoCredito, txtNumComprobante;
 	JButton btnComprarCredito, btnCobrarComprobante;
 	
@@ -28,44 +28,46 @@ public class ventanaCaja extends JFrame implements ActionListener {
 
 		setForeground(UIManager.getColor("ToolBar.dockingForeground"));
 		setFont(new Font("Baskerville Old Face", Font.PLAIN, 26));
-		setSize(700, 600);
+		setSize(700, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		getContentPane().setLayout(null);
 
-		lblIngreseMonto = new JLabel("Ingrese Monto Credito :");
-		lblIngreseMonto.setBounds(41, 100, 130, 14);
+		lblIngreseMonto = new JLabel("Ingrese monto credito");
+		lblIngreseMonto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngreseMonto.setBounds(0, 100, 350, 14);
 		getContentPane().add(lblIngreseMonto);
 
 		txtMontoCredito = new JTextField();
-		txtMontoCredito.setBounds(41, 125, 123, 20);
+		txtMontoCredito.setBounds(75, 125, 200, 20);
 		getContentPane().add(txtMontoCredito);
 		txtMontoCredito.setColumns(10);
 
-		btnComprarCredito = new JButton("Comprar Credito");
-		btnComprarCredito.setBounds(41, 156, 123, 23);
+		btnComprarCredito = new JButton("Comprar");
+		btnComprarCredito.setBounds(75, 155, 200, 23);
 		getContentPane().add(btnComprarCredito);
 		btnComprarCredito.addActionListener(this);
 
-		lblIngreseNumTicket = new JLabel("Ingrese Numero De Ticket:");
-		lblIngreseNumTicket.setBounds(285, 100, 137, 14);
-		getContentPane().add(lblIngreseNumTicket);
+		lblNumeroComprobante = new JLabel("Ingrese Nº de comprobante");
+		lblNumeroComprobante.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumeroComprobante.setBounds(350, 100, 350, 14);
+		getContentPane().add(lblNumeroComprobante);
 
 		txtNumComprobante = new JTextField();
-		txtNumComprobante.setBounds(290, 125, 113, 20);
+		txtNumComprobante.setBounds(425, 125, 200, 20);
 		getContentPane().add(txtNumComprobante);
 		txtNumComprobante.setColumns(10);
 
-		btnCobrarComprobante = new JButton("Cobrar Ticket");
-		btnCobrarComprobante.setBounds(290, 156, 113, 23);
+		btnCobrarComprobante = new JButton("Retirar dinero");
+		btnCobrarComprobante.setBounds(425, 155, 200, 20);
 		getContentPane().add(btnCobrarComprobante);
 		btnCobrarComprobante.addActionListener(this);
 
-		JLabel lblNewLabel_2 = new JLabel("CAJA --Tragamonedas");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(97, 24, 241, 20);
-		getContentPane().add(lblNewLabel_2);
+		JLabel lblTitulo = new JLabel("Caja");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setBounds(0, 24, 700, 20);
+		getContentPane().add(lblTitulo);
 
 		lblNumeroTicket = new JLabel("");
 		lblNumeroTicket.setBounds(30, 190, 161, 60);
@@ -82,7 +84,7 @@ public class ventanaCaja extends JFrame implements ActionListener {
 		retorno = Integer.parseInt(txtMontoCredito.getText());
 
 		Ticket ticket = Controlador.getInstance().generarTicket(retorno);
-		lblNumeroTicket.setText("numero de ticket: " + ticket.getNumeroTicket());
+		lblNumeroTicket.setText("Nº Ticket: " + ticket.getNumeroTicket());
 	}
 
 	public void retirarDinero() {

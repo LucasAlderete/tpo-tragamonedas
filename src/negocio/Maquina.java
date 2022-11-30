@@ -8,7 +8,7 @@ import gui.MaquinaView;
 
 public class Maquina {
 	private List<Casilla> casillas;
-	private float recaudacion;
+	private float recaudacion = 10000f;
 	private List<Premio> premios;
 	private float minimo;
 	private float precioJugada;
@@ -99,7 +99,7 @@ public class Maquina {
 				restarRecaudacion(montoPremio);
 				hasPremio = true;
 
-				this.msj = "Ganaste: $" + premio.getPremio() + " (" + premio.getNombre() + ")"; 
+				this.msj = "Ganaste: $" + premio.getPremio() + " (" + premio.getNombre() + ")";
 			}
 		}
 
@@ -191,6 +191,14 @@ public class Maquina {
 	public MaquinaView toView() {
 		String estado = this.hasPremio ? "Ganaste!" : "No ganaste";
 		return new MaquinaView(this.credito, estado, this.montoPremio, this.casillas, this.msj, this.recaudacion);
+	}
+
+	public void setMsj(String msj) {
+		this.msj = msj;
+	}
+
+	public String getMsj() {
+		return msj;
 	}
 
 }

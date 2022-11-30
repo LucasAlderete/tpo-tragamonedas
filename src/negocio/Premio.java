@@ -44,7 +44,7 @@ public class Premio {
 		
 		for (int i = 0; i < getCantidadCasillas(); i++) {
 			if (casillas.get(i).getNumeroCasilla() == combinacion.get(i).getNumeroCasilla() &&
-					casillas.get(i).getFruta().equals(combinacion.get(i).getFruta())) {
+					casillas.get(i).getFruta().getNombre().equals(combinacion.get(i).getFruta().getNombre())) {
 				result = true;
 			}else {
 				return false;

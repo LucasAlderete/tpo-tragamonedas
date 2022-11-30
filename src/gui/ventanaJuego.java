@@ -50,7 +50,7 @@ public class ventanaJuego extends JFrame implements ActionListener {
 	TimerTask tarea;
 	int velocidad;
 	Icon icono;
-	JLabel lblCasilla1, lblCredito,lblComprobante;
+	JLabel lblCasilla1, lblCredito, lblComprobante, lblSlot1, lblSlot2, lblSlot3;
 	JButton btnTirar, btnVerCredito, btnIngresarCredito, btnRetirarDinero;
 
 	static int contador = 0;
@@ -86,8 +86,8 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		getContentPane().add(btnIngresarCredito);
 
 		btnRetirarDinero = new JButton("Retirar Dinero");
-		btnRetirarDinero.addActionListener(this); 
-	
+		btnRetirarDinero.addActionListener(this);
+
 		btnRetirarDinero.setBounds(537, 422, 126, 73);
 		getContentPane().add(btnRetirarDinero);
 
@@ -95,16 +95,16 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		panel.setBounds(20, 58, 643, 146);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		JLabel lblSlot1 = new JLabel("");
+
+		lblSlot1 = new JLabel("");
 		lblSlot1.setBounds(65, 27, 120, 108);
 		panel.add(lblSlot1);
-		
-		JLabel lblSlot2 = new JLabel("");
+
+		lblSlot2 = new JLabel("");
 		lblSlot2.setBounds(258, 27, 120, 108);
 		panel.add(lblSlot2);
-		
-		JLabel lblSlot3 = new JLabel("");
+
+		lblSlot3 = new JLabel("");
 		lblSlot3.setBounds(471, 27, 120, 108);
 		panel.add(lblSlot3);
 
@@ -122,7 +122,7 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		JLabel lblNewLabel = new JLabel("Numero Ticket Credito:");
 		lblNewLabel.setBounds(288, 385, 113, 14);
 		getContentPane().add(lblNewLabel);
-		
+
 		lblComprobante = new JLabel("");
 		lblComprobante.setBounds(400, 228, 263, 106);
 		getContentPane().add(lblComprobante);
@@ -175,32 +175,44 @@ public class ventanaJuego extends JFrame implements ActionListener {
 			Controlador.getInstance().ingresarCredito(retorno);
 			lblCredito.setText("credito: " + Controlador.getInstance().getCreditoMaquina());
 		} catch (Exception e) {
-			
+
 		}
-		
 
 	}
-	
+
 	public void generarComprobante() {
 		Comprobante comprobante = Controlador.getInstance().generarComprobante();
-		lblComprobante.setText("su comprobante es : "+ comprobante.getNumeroComprobante());
+		lblComprobante.setText("su comprobante es : " + comprobante.getNumeroComprobante());
 		lblCredito.setText("credito: " + Controlador.getInstance().getCreditoMaquina());
+	}
+
+	public void jugar() {
+
+		// mostrarResultadoFotos();
+		// moverFoto();
+		Controlador.getInstance().jugar();
+		MaquinaView maquinaView = Controlador.getInstance().getMaquinaView();
+
+		lblSlot1.setText(maquinaView.getCombinacion().get(0).getFruta().getNombre());
+		lblSlot2.setText(maquinaView.getCombinacion().get(1).getFruta().getNombre());
+		lblSlot3.setText(maquinaView.getCombinacion().get(2).getFruta().getNombre());
+		
+		this.lblCredito.setText(String.valueOf(maquinaView.getCredito()));
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 
 		if (evento.getSource() == btnTirar) {
-			//mostrarResultadoFotos();
-			//moverFoto();
-			Controlador.getInstance().jugar()
+			jugar();
 		}
 
 		if (evento.getSource() == btnIngresarCredito) {
 			CargarCredito();
 		}
-		
-		if(evento.getSource()== btnRetirarDinero) {
+
+		if (evento.getSource() == btnRetirarDinero) {
 			generarComprobante();
 		}
 

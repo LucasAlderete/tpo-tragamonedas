@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import gui.MaquinaView;
 import negocio.Caja;
 import negocio.Casilla;
 import negocio.Comprobante;
@@ -177,6 +178,10 @@ public class Controlador {
 		Comprobante comprobante = maquina.generarComprobante();
 		comprobantes.add(comprobante);
 		return comprobante;
+	}
+	
+	public MaquinaView getMaquinaView() {
+		return this.maquina.toView();
 	}
 
 }

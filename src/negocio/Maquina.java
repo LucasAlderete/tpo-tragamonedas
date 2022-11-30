@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import gui.MaquinaView;
+
 public class Maquina {
 	private List<Casilla> casillas;
 	private float recaudacion;
@@ -13,14 +15,17 @@ public class Maquina {
 	private float credito;
 	private String identificador;
 	private int numero;
-	
+	private boolean hasPremio;
+	private float montoPremio;
+	private String msj;
+
 	private final int MAX_NUMERO_TICKET = 9999;
 	private final float CREDITO_DEFAULT = 0;
 
 	public Maquina() {
 		premios = new ArrayList<Premio>();
 	}
-	
+
 	public Maquina(String identificador, float precioJugada) {
 		premios = new ArrayList<Premio>();
 		this.identificador = identificador;
@@ -77,15 +82,11 @@ public class Maquina {
 	}
 
 	public void jugar() {
-		boolean hasPremio = false;
+		hasPremio = false;
 
 		// se seleccionan frutas al azar por cada casilla
 		for (Casilla casilla : casillas) {
 			casilla.setFrutaAleatoria();
-
-			// TODO: eliminar este sout
-			System.out.println(casilla.getNumeroCasilla() + " - " + casilla.getFruta().getNombre());
-
 		}
 
 		// se comprueba si la combinacion tiene premio
@@ -93,13 +94,12 @@ public class Maquina {
 
 			// tiene premio
 			if (premio.soyElPremio(casillas)) {
-				float montoPremio = premio.getPremio();
+				montoPremio = premio.getPremio();
 				sumarCredito(montoPremio);
 				restarRecaudacion(montoPremio);
 				hasPremio = true;
 
-				// TODO: este sout no va aca moverlo al controlador o lugar correspondiente
-				System.out.println("Ganaste: $" + premio.getPremio() + " (" + premio.getNombre() + ")");
+				this.msj = "Ganaste: $" + premio.getPremio() + " (" + premio.getNombre() + ")"; 
 			}
 		}
 
@@ -116,6 +116,7 @@ public class Maquina {
 	public void addPremio(Premio premio) {
 		this.premios.add(premio);
 	}
+
 	public void addPremios(List<Premio> premios) {
 		for (Premio premio : premios) {
 			this.premios.add(premio);
@@ -138,7 +139,7 @@ public class Maquina {
 
 		Comprobante comprobante = new Comprobante();
 		comprobante.setNumeroComprobante(generarNumeroComprobante());
-		
+
 		// poner credito en 0
 		this.setCredito(CREDITO_DEFAULT);
 
@@ -172,21 +173,24 @@ public class Maquina {
 	public boolean hasCreditoParaJugar() {
 		return credito >= precioJugada;
 	}
-	
+
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
-	
+
 	public String getIdentificador() {
 		return identificador;
 	}
-	
+
 	private String generarNumeroComprobante() {
 		this.numero++;
 		String numero = this.identificador + "-" + this.numero;
 		return numero;
 	}
-	
-	
-	
+
+	public MaquinaView toView() {
+		String estado = this.hasPremio ? "Ganaste!" : "No ganaste";
+		return new MaquinaView(this.credito, estado, this.montoPremio, this.casillas, this.msj, this.recaudacion);
+	}
+
 }

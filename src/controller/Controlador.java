@@ -22,7 +22,6 @@ public class Controlador {
 	final float PRECIO_JUGADA_1 = 10f;
 	final float PRECIO_JUGADA_2 = 50f;
 	
-	//todo:sacar esta maquina
 	Maquina maquina1;
 	
 	private Caja caja;
@@ -117,30 +116,8 @@ public class Controlador {
 		maquina1.setCasillas(casillas);
 		maquina1.addPremios(premios);
 		maquina1.setIdentificador("MAQ1");
-		
-		
-		
 		maquina1.setPrecioJugada(PRECIO_JUGADA_1);
 		maquina1.setRecaudacion(maquina1.getPremioMaximo());
-		
-		//TODO: eliminar este hardcodeo de credito y hacerlo con el ticket como indicar el enunciado
-		maquina1.setCredito(200f);
-		
-		
-		/*
-		Ticket ticket1 = new Ticket();
-		ticket1.setMonto(100.5f);
-		ticket1.setNumeroTicket(1);
-		ticket1.setUtilizado(false);
-		
-		Ticket ticket2 = new Ticket();
-		ticket2.setMonto(100.5f);
-		ticket2.setNumeroTicket(7);
-		ticket2.setUtilizado(false);
-
-		maquina1.ingresarCredito(ticket1.getNumeroTicket());
-		maquina1.ingresarCredito(ticket2.getNumeroTicket());
-		*/
 	}
 	
 	public void jugar() {
@@ -164,6 +141,14 @@ public class Controlador {
 		});
 	}
 
+	public void ingresarCredito(int numeroTicket) {
+		
+		if (this.existeTicket(numeroTicket).isPresent()) {
+			Ticket ticket = existeTicket(numeroTicket).get();
+			maquina1.setCredito(ticket.getMonto());
+		}
+
+	}
 	
 	private Optional<Ticket> existeTicket(int nroTicket) {
 		return tickets.stream().filter(ticket -> ticket.soyElTicket(nroTicket) && ticket.sePuedeUtilizar()).findFirst();

@@ -158,4 +158,8 @@ public class Controlador {
 		return comprobantes.stream().filter(comprobante -> comprobante.soyElComprobante(nroComprobante) && comprobante.sePuedeUtilizar()).findFirst();
 	}
 	
+	public float getCreditoMaquina() {
+		return maquina1.getCredito();
+	}
+	
 }

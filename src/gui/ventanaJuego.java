@@ -50,12 +50,12 @@ public class ventanaJuego extends JFrame implements ActionListener {
 	TimerTask tarea;
 	int velocidad;
 	Icon icono;
-	JLabel lblCasilla1, lblCredito, lblComprobante, lblSlot1, lblSlot2, lblSlot3;
+	JLabel lblCasilla1, lblCredito, lblComprobante, lblSlot1, lblSlot2, lblSlot3,lblEstado,lblMensaje,lblRecaudacion;
 	JButton btnTirar, btnVerCredito, btnIngresarCredito, btnRetirarDinero;
 
 	static int contador = 0;
 	private JTextField txtFieldIngresarCredito;
-
+	
 	public ventanaJuego() {
 		setTitle("\t\t\t\tTPO-IOO\t\tTRAGAMONEDAS SLOT MACHINE");
 		setForeground(UIManager.getColor("ToolBar.dockingForeground"));
@@ -73,11 +73,9 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		btnTirar.setToolTipText("");
 		btnTirar.setBounds(20, 422, 126, 73);
 		getContentPane().add(btnTirar);
-		btnTirar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnTirar.addActionListener(this);
 
-			};
-		});
+	
 
 		btnIngresarCredito = new JButton("Ingresar Credito");
 		btnIngresarCredito.addActionListener(this);
@@ -115,17 +113,29 @@ public class ventanaJuego extends JFrame implements ActionListener {
 
 		txtFieldIngresarCredito = new JTextField();
 		txtFieldIngresarCredito.setHorizontalAlignment(SwingConstants.LEFT);
-		txtFieldIngresarCredito.setBounds(411, 382, 118, 20);
+		txtFieldIngresarCredito.setBounds(388, 391, 118, 20);
 		getContentPane().add(txtFieldIngresarCredito);
 		txtFieldIngresarCredito.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Numero Ticket Credito:");
-		lblNewLabel.setBounds(288, 385, 113, 14);
+		lblNewLabel.setBounds(265, 385, 113, 14);
 		getContentPane().add(lblNewLabel);
 
 		lblComprobante = new JLabel("");
-		lblComprobante.setBounds(400, 228, 263, 106);
+		lblComprobante.setBounds(20, 337, 595, 20);
 		getContentPane().add(lblComprobante);
+		
+		lblEstado = new JLabel("");
+		lblEstado.setBounds(20, 306, 595, 20);
+		getContentPane().add(lblEstado);
+		
+		lblMensaje = new JLabel("");
+		lblMensaje.setBounds(20, 261, 595, 20);
+		getContentPane().add(lblMensaje);
+		
+		lblRecaudacion = new JLabel("");
+		lblRecaudacion.setBounds(44, 215, 595, 20);
+		getContentPane().add(lblRecaudacion);
 
 	}
 
@@ -197,7 +207,10 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		lblSlot2.setText(maquinaView.getCombinacion().get(1).getFruta().getNombre());
 		lblSlot3.setText(maquinaView.getCombinacion().get(2).getFruta().getNombre());
 		
-		this.lblCredito.setText(String.valueOf(maquinaView.getCredito()));
+		lblCredito.setText(String.valueOf(maquinaView.getCredito()));
+		lblMensaje.setText(String.valueOf(maquinaView.getMsj()));
+		lblEstado.setText(String.valueOf(maquinaView.getEstado()));
+		lblRecaudacion.setText(String.valueOf(maquinaView.getRecaudacion()));
 		
 	}
 

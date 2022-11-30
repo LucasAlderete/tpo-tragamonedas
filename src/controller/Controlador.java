@@ -116,6 +116,8 @@ public class Controlador {
 		maquina1 = new Maquina();
 		maquina1.setCasillas(casillas);
 		maquina1.addPremios(premios);
+		maquina1.setIdentificador("MAQ1");
+		
 		
 		
 		maquina1.setPrecioJugada(PRECIO_JUGADA_1);

@@ -11,12 +11,21 @@ public class Maquina {
 	private float minimo;
 	private float precioJugada;
 	private float credito;
+	private String identificador;
+	private int numero;
 	
 	private final int MAX_NUMERO_TICKET = 9999;
 	private final float CREDITO_DEFAULT = 0;
 
 	public Maquina() {
 		premios = new ArrayList<Premio>();
+	}
+	
+	public Maquina(String identificador, float precioJugada) {
+		premios = new ArrayList<Premio>();
+		this.identificador = identificador;
+		this.precioJugada = precioJugada;
+		numero = 0;
 	}
 
 	public List<Casilla> getCasillas() {
@@ -131,26 +140,21 @@ public class Maquina {
 		recaudacion -= monto;
 	}
 
-	public void ingresarCredito(int numeroTicket) {
+	public void ingresarCredito(String numeroTicket) {
 		// existe ticket?
 		// no fue utilizado?
 		// agregar credito
 	}
 
-	public Ticket generarComprobante() {
-		// poner credito en comprobante o ticket
-		Random random = new Random();
-		int nroTicketRandom = random.nextInt(MAX_NUMERO_TICKET);
+	public Comprobante generarComprobante() {
 
-		Ticket ticket = new Ticket();
-		ticket.setMonto(this.credito);
-		ticket.setNumeroTicket(nroTicketRandom);
-		ticket.setUtilizado(false);
-
+		Comprobante comprobante = new Comprobante();
+		comprobante.setNumeroComprobante(generarNumeroComprobante());
+		
 		// poner credito en 0
 		this.setCredito(CREDITO_DEFAULT);
 
-		return ticket;
+		return comprobante;
 	}
 
 	public void sumarCredito(float monto) {
@@ -180,4 +184,19 @@ public class Maquina {
 	public boolean hasCreditoParaJugar() {
 		return credito >= precioJugada;
 	}
+	
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+	
+	public String getIdentificador() {
+		return identificador;
+	}
+	
+	private String generarNumeroComprobante() {
+		this.numero++;
+		String numero = this.identificador + "-" + this.numero;
+		return numero;
+	}
+	
 }

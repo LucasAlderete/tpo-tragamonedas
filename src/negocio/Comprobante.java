@@ -5,6 +5,9 @@ public class Comprobante {
 	private float monto;
 	private boolean utilizado;
 	
+	public Comprobante() {
+		utilizado = false;
+	}
 	
 	public boolean soyElComprobante(String numeroComprobante) {
 		return this.numeroComprobante.equals(numeroComprobante);
@@ -21,5 +24,14 @@ public class Comprobante {
 	public void setUtilizado(boolean utilizado) {
 		this.utilizado = utilizado;
 	}
+	
+	public void setNumeroComprobante(String numeroComprobante) {
+		this.numeroComprobante = numeroComprobante;
+	}
+	
+	public String getNumeroComprobante() {
+		return numeroComprobante;
+	}
+	
 	
 }

@@ -28,6 +28,7 @@ public class Controlador {
 
 	public Controlador() {
 		this.caja = new Caja();
+		this.maquina = new Maquina();
 		this.comprobantes = new ArrayList<>();
 		cargarDatos();
 	}
@@ -94,7 +95,7 @@ public class Controlador {
 		Fruta banana = new Fruta("Banana");
 		Fruta guinda = new Fruta("Guinda");
 		Fruta sandia = new Fruta("Sandia");
-		List<Fruta> frutas = List.of(manzana, uva, frutilla, banana, guinda, sandia);
+		frutas = List.of(manzana, uva, frutilla, banana, guinda, sandia);
 	}
 
 	private void cargarCasillas() {
@@ -106,7 +107,6 @@ public class Controlador {
 	}
 
 	public void inicilizarMaquina() {
-		maquina = new Maquina();
 		maquina.setCasillas(casillas);
 		maquina.addPremios(premios);
 		maquina.setIdentificador("MAQ");

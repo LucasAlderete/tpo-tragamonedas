@@ -81,10 +81,10 @@ public class ventanaPrincipal extends JFrame implements ActionListener  {
 			}
 		
 		/**if(evento.getSource()==btnCaja)
-		*{
-		*	cajaView miVentanaCaja= new cajaView();
-		*	miVentanaCaja.setVisible(true);
-		*/}
+		{
+			cajaView miVentanaCaja= new cajaView();
+			miVentanaCaja.setVisible(true);
+			*/}
 	
 	
 	

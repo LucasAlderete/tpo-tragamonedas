@@ -33,7 +33,7 @@ import javax.swing.JPasswordField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-import controaldor.Controlador;
+import controller.Controlador;
 import view.AvionView;
 import view.GloboView;
 
@@ -48,20 +48,17 @@ public class ventanaJuego extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 6208995886501749965L;
 		
 	private Container contenedor;
-	JPanel panel1 ;
-	JPanel panel2;
-	JPanel panel3;
-	JPanel relleno3;
-	JPanel relleno4;
+
 	Timer timer;
 	TimerTask tarea;
 	int velocidad ;
 	Icon icono; 
-	JLabel lblCasilla1;
+	JLabel lblCasilla1,lblCredito;
 	JButton btnTirar,btnVerCredito,btnIngresarCredito,btnRetirarDinero;
+	Controlador  controller;
 
 	static int contador = 0;
-	private JTextField textField;
+	private JTextField txtFieldIngresarCredito;
 	
 	public ventanaJuego() {
 		setTitle("\t\t\t\tTPO-IOO\t\tTRAGAMONEDAS SLOT MACHINE");
@@ -76,7 +73,7 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		getContentPane().setLayout(null);
 		
 		JButton btnTirar = new JButton("Tirar");
-		btnTirar.setForeground(UIManager.getColor("Button.background"));
+		btnTirar.setForeground(UIManager.getColor("TextArea.caretForeground"));
 		btnTirar.setToolTipText("");
 		btnTirar.setBounds(20, 422, 126, 73);
 		getContentPane().add(btnTirar);
@@ -84,16 +81,10 @@ public class ventanaJuego extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 			
 			};	});
-	
-		JButton btnVerCredito = new JButton("Ver Credito");
-		btnVerCredito.setBounds(190, 422, 126, 73);
-		getContentPane().add(btnVerCredito);
 		
 		JButton btnIngresarCredito = new JButton("Ingresar Credito");
-		btnIngresarCredito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnIngresarCredito.addActionListener(this );
+			
 		btnIngresarCredito.setBounds(365, 422, 126, 73);
 		getContentPane().add(btnIngresarCredito);
 		
@@ -122,39 +113,32 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		lblCasilla1.setBounds(57, 26, 122, 84);
 		panel.add(lblCasilla1);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(UIManager.getColor("List.selectionBackground"));
-		lblNewLabel.setBackground(UIManager.getColor("List.selectionBackground"));
-		lblNewLabel.setBounds(254, 26, 122, 84);
-		panel.add(lblNewLabel);
+		JLabel lblCasilla2 = new JLabel("New label");
+		lblCasilla2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCasilla2.setForeground(UIManager.getColor("List.selectionBackground"));
+		lblCasilla2.setBackground(UIManager.getColor("List.selectionBackground"));
+		lblCasilla2.setBounds(254, 26, 122, 84);
+		panel.add(lblCasilla2);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(461, 26, 122, 84);
-		panel.add(lblNewLabel_1);
+		JLabel lblCasilla3 = new JLabel("New label");
+		lblCasilla3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCasilla3.setBounds(461, 26, 122, 84);
+		panel.add(lblCasilla3);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(342, 306, 192, 98);
-		getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		JLabel lblCredito = new JLabel("Credito :     0.0");
+		lblCredito.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCredito.setBounds(179, 423, 126, 72);
+		getContentPane().add(lblCredito);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 24, 172, 63);
-		textField.setForeground(new Color(0, 0, 0));
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_1.add(textField);
-		textField.setBackground(UIManager.getColor("TextField.darkShadow"));
-		textField.setColumns(10);
+		txtFieldIngresarCredito = new JTextField();
+		txtFieldIngresarCredito.setHorizontalAlignment(SwingConstants.LEFT);
+		txtFieldIngresarCredito.setBounds(411, 382, 118, 20);
+		getContentPane().add(txtFieldIngresarCredito);
+		txtFieldIngresarCredito.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(173, 322, 149, 85);
-		getContentPane().add(panel_2);
-		panel_2.setLayout(null);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 16, 118, 58);
-		panel_2.add(textArea);
-		textArea.setBackground(UIManager.getColor("ComboBox.foreground"));
+		JLabel lblNewLabel = new JLabel("Numero Ticket Credito:");
+		lblNewLabel.setBounds(301, 385, 113, 14);
+		getContentPane().add(lblNewLabel);
 	
 		
 		/*moverFoto(){
@@ -226,17 +210,32 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		
 	public void mostrarResultadoFotos() {
 		
-		
-		
 	}
 	
+	public void CargarCredito() {
+		int retorno;
+		retorno = Integer.parseInt( txtFieldIngresarCredito.getText());
+		Controlador.getInstance().inicilizarMaquina();
+		Controlador.getInstance().ingresarCredito(retorno);
+		lblCredito.setText("credito: "+Controlador.getInstance().getCreditoMaquina());
+		
+		}
+	@Override
 	public void actionPerformed(ActionEvent evento) {
 		
 		if (evento.getSource()== btnTirar)
 		{	mostrarResultadoFotos();
 			moverFoto();
-	
-		}		
+			
+		}
+		
+		//if (evento.getSource() == btnIngresarCredito) {
+			
+			CargarCredito();
+			
+	//	}
+		
+		
 	}
 }
 

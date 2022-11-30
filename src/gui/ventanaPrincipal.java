@@ -68,6 +68,11 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
 			miVentanaJuego.setVisible(true);
 
 		}
+		
+		if(evento.getSource()== btnCaja) {
+			ventanaCaja miVentanaCaja = new ventanaCaja();
+			miVentanaCaja.setVisible(true);
+		}
 
 	}
 

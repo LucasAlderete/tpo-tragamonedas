@@ -34,6 +34,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import controller.Controlador;
+import negocio.Comprobante;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -49,7 +50,7 @@ public class ventanaJuego extends JFrame implements ActionListener {
 	TimerTask tarea;
 	int velocidad;
 	Icon icono;
-	JLabel lblCasilla1, lblCredito;
+	JLabel lblCasilla1, lblCredito,lblComprobante;
 	JButton btnTirar, btnVerCredito, btnIngresarCredito, btnRetirarDinero;
 
 	static int contador = 0;
@@ -85,10 +86,8 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		getContentPane().add(btnIngresarCredito);
 
 		btnRetirarDinero = new JButton("Retirar Dinero");
-		btnRetirarDinero.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnRetirarDinero.addActionListener(this); 
+	
 		btnRetirarDinero.setBounds(537, 422, 126, 73);
 		getContentPane().add(btnRetirarDinero);
 
@@ -132,8 +131,12 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		txtFieldIngresarCredito.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Numero Ticket Credito:");
-		lblNewLabel.setBounds(301, 385, 113, 14);
+		lblNewLabel.setBounds(288, 385, 113, 14);
 		getContentPane().add(lblNewLabel);
+		
+		lblComprobante = new JLabel("");
+		lblComprobante.setBounds(400, 228, 263, 106);
+		getContentPane().add(lblComprobante);
 
 	}
 
@@ -185,7 +188,14 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		} catch (Exception e) {
 			
 		}
+		
 
+	}
+	
+	public void generarComprobante() {
+		Comprobante comprobante = Controlador.getInstance().generarComprobante();
+		lblComprobante.setText("su comprobante es : "+ comprobante.getNumeroComprobante());
+		lblCredito.setText("credito: " + Controlador.getInstance().getCreditoMaquina());
 	}
 
 	@Override
@@ -198,6 +208,10 @@ public class ventanaJuego extends JFrame implements ActionListener {
 
 		if (evento.getSource() == btnIngresarCredito) {
 			CargarCredito();
+		}
+		
+		if(evento.getSource()== btnRetirarDinero) {
+			generarComprobante();
 		}
 
 	}

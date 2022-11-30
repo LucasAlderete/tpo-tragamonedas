@@ -157,8 +157,8 @@ public class Controlador {
 				.findFirst();
 	}
 
-	public void generarTicket(float monto) {
-		caja.generarTicket(monto);
+	public Ticket generarTicket(float monto) {
+		return caja.generarTicket(monto);
 	}
 
 	public boolean usarTicket(int nroTicket) {
@@ -173,7 +173,7 @@ public class Controlador {
 		}
 	}
 
-	private Comprobante generarComprobante() {
+	public Comprobante generarComprobante() {
 		Comprobante comprobante = maquina.generarComprobante();
 		comprobantes.add(comprobante);
 		return comprobante;

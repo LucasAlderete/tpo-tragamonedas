@@ -95,29 +95,18 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		panel.setBounds(20, 58, 643, 146);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-
-		JButton lblCasilla1 = new JButton();
-		lblCasilla1.addActionListener(this);
-		lblCasilla1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCasilla1.setToolTipText("hola");
-		lblCasilla1.setForeground(UIManager.getColor("ToolBar.dockingForeground"));
-		lblCasilla1.setText("hola como va\r\n");
-		lblCasilla1.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
-		lblCasilla1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\tpo-tragamonedas\\media\\cereza.jpeg"));
-		lblCasilla1.setBounds(57, 26, 122, 84);
-		panel.add(lblCasilla1);
-
-		JLabel lblCasilla2 = new JLabel("New label");
-		lblCasilla2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCasilla2.setForeground(UIManager.getColor("List.selectionBackground"));
-		lblCasilla2.setBackground(UIManager.getColor("List.selectionBackground"));
-		lblCasilla2.setBounds(254, 26, 122, 84);
-		panel.add(lblCasilla2);
-
-		JLabel lblCasilla3 = new JLabel("New label");
-		lblCasilla3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCasilla3.setBounds(461, 26, 122, 84);
-		panel.add(lblCasilla3);
+		
+		JLabel lblSlot1 = new JLabel("");
+		lblSlot1.setBounds(65, 27, 120, 108);
+		panel.add(lblSlot1);
+		
+		JLabel lblSlot2 = new JLabel("");
+		lblSlot2.setBounds(258, 27, 120, 108);
+		panel.add(lblSlot2);
+		
+		JLabel lblSlot3 = new JLabel("");
+		lblSlot3.setBounds(471, 27, 120, 108);
+		panel.add(lblSlot3);
 
 		lblCredito = new JLabel("Credito :     0.0");
 		lblCredito.setHorizontalAlignment(SwingConstants.CENTER);
@@ -202,8 +191,9 @@ public class ventanaJuego extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 
 		if (evento.getSource() == btnTirar) {
-			mostrarResultadoFotos();
-			moverFoto();
+			//mostrarResultadoFotos();
+			//moverFoto();
+			Controlador.getInstance().jugar()
 		}
 
 		if (evento.getSource() == btnIngresarCredito) {

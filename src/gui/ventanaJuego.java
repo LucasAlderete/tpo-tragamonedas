@@ -205,6 +205,7 @@ public class ventanaJuego extends JFrame implements ActionListener {
 
 		// mostrarResultadoFotos();
 		// moverFoto();
+		Controlador.getInstance().inicilizarMaquina();
 		Controlador.getInstance().jugar();
 		MaquinaView maquinaView = Controlador.getInstance().getMaquinaView();
 

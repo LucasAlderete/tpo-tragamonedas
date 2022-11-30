@@ -139,7 +139,7 @@ public class Controlador {
 		if (caja.existeTicket(numeroTicket).isPresent()) {
 			Ticket ticket = caja.existeTicket(numeroTicket).get();
 			usarTicket(numeroTicket);
-			maquina.setCredito(ticket.getMonto());
+			maquina.setCredito(maquina.getCredito() + ticket.getMonto());
 
 			return true;
 		}

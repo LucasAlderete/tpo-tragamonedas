@@ -109,13 +109,7 @@ public class Maquina {
 			// se resta el precio de la jugada
 			restarCredito(precioJugada);
 
-			// TODO: eliminar este sout
-			System.out.println("Perdiste! la recaudacion es de: $" + recaudacion);
 		}
-
-		// TODO: eliminar souts
-		System.out.println("La recaudacion de la maquina quedo en: $" + this.recaudacion);
-		System.out.println("El credito disponible es: $" + this.credito);
 
 	}
 
@@ -138,12 +132,6 @@ public class Maquina {
 
 	public void restarRecaudacion(float monto) {
 		recaudacion -= monto;
-	}
-
-	public void ingresarCredito(String numeroTicket) {
-		// existe ticket?
-		// no fue utilizado?
-		// agregar credito
 	}
 
 	public Comprobante generarComprobante() {
@@ -198,5 +186,7 @@ public class Maquina {
 		String numero = this.identificador + "-" + this.numero;
 		return numero;
 	}
+	
+	
 	
 }

@@ -6,19 +6,17 @@ import negocio.Fruta;
 import negocio.Premio;
 
 public class maquinaView {
-	private float credito , verCredito , precioJugada ;
+	private float credito, verCredito, precioJugada;
 	private List<String> premioActual;
-	
-	
-	
-	public maquinaView() {}
-	
-	public maquinaView(float credito, float verCredito, List<String> premioActual,float precioJugada) {
+
+	public maquinaView() {
+	}
+
+	public maquinaView(float credito, float verCredito, List<String> premioActual, float precioJugada) {
 		this.credito = credito;
 		this.precioJugada = precioJugada;
 		this.premioActual = premioActual;
 		this.verCredito = verCredito;
-		
 	}
 
 	public float getCredito() {
@@ -36,7 +34,5 @@ public class maquinaView {
 	public float getPrecioJugada() {
 		return precioJugada;
 	}
-	
-	
-	
+
 }

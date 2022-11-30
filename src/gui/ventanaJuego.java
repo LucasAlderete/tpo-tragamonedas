@@ -195,7 +195,12 @@ public class ventanaJuego extends JFrame implements ActionListener {
 		lblComprobante.setText("su comprobante es : " + comprobante.getNumeroComprobante());
 		lblCredito.setText("credito: " + Controlador.getInstance().getCreditoMaquina());
 	}
-
+	
+	public void setImageLabel() {
+		ImageIcon image =new ImageIcon();
+		Icon icon = new ImageIcon(image.getImage()
+				;
+	}
 	public void jugar() {
 
 		// mostrarResultadoFotos();
